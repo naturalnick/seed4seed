@@ -11,6 +11,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
 import Auth from "./routes/Auth/Auth.jsx";
 import Events from "./routes/Events/Events.jsx";
 import MySeeds from "./routes/MySeeds/MySeeds.jsx";
+import Seed from "./routes/Seed/Seed.jsx";
+import Messages from "./routes/Messages/Messages.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
 				element: <Events />,
 			},
 			{
-				path: "/profile/edit",
+				path: "/seed/:seedID",
+				element: <Seed />,
+			},
+			{
+				path: "/myprofile",
 				element: (
 					<ProtectedRoute>
 						<MyProfile />
@@ -46,10 +52,18 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/profile/:profileId",
+				path: "/profile/:userID",
 				element: (
 					<ProtectedRoute>
 						<Profile />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: "/messages",
+				element: (
+					<ProtectedRoute>
+						<Messages />
 					</ProtectedRoute>
 				),
 			},

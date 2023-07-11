@@ -8,6 +8,7 @@ export function useUser(userID) {
 	const [bio, setBio] = useState(undefined);
 	const [rating, setRating] = useState(undefined);
 	const [location, setLocation] = useState(undefined);
+	const [dateCreated, setDateCreated] = useState(undefined);
 
 	useEffect(() => {
 		(async () => {
@@ -20,8 +21,9 @@ export function useUser(userID) {
 			setBio(user.bio);
 			setRating(user.rating);
 			setLocation(user.location);
+			setDateCreated(user.dateCreated);
 		})();
 	}, [userID]);
 
-	return { username, bio, rating, location };
+	return { username, bio, rating, location, dateCreated };
 }

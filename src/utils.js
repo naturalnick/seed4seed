@@ -7,3 +7,16 @@ export function titleCase(text) {
 		})
 		.join(" ");
 }
+
+export function formatDateAndTime(timestamp) {
+	const today = new Date();
+	const date = timestamp.toDate();
+	if (date.toDateString() === today.toDateString()) return "Today";
+	if (date.getDate() - today.getDate() === 1) return "Yesterday";
+
+	const dateString = date.toLocaleDateString("en-US", {
+		day: "numeric",
+		month: "long",
+	});
+	return dateString;
+}
