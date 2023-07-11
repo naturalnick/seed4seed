@@ -19,13 +19,13 @@ export async function addSeed(user, seed) {
 	});
 }
 
-export async function updateSeed(userID, changes) {
-	await updateDoc(doc(db, "seeds", userID), {
+export async function updateSeed(seedID, changes) {
+	await updateDoc(doc(db, "seeds", seedID), {
 		...changes,
 	});
 }
 
-export async function getSeed(userID) {
-	const docSnap = await getDoc(doc(db, "seeds", userID));
+export async function getSeed(seedID) {
+	const docSnap = await getDoc(doc(db, "seeds", seedID));
 	return docSnap.exists() ? docSnap.data() : undefined;
 }

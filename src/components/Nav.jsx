@@ -66,7 +66,7 @@ export default function Nav() {
 									<a>Events</a>
 								</li>
 								<li>
-									<Link to="/profile/edit">My Profile</Link>
+									<Link to="/myprofile">My Profile</Link>
 								</li>
 								<li>
 									<Link to="/myseeds">My Seeds</Link>
