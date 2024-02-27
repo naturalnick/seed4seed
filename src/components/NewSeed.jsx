@@ -1,26 +1,29 @@
-import { useState } from "react";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import PlantGroupSelect from "./PlantGroupSelect";
-import PlantTypeSelect from "./PlantTypeSelect";
 import { useFormik } from "formik";
+import { useState } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useAuth } from "src/hooks/useAuth";
+import { useUser } from "src/hooks/useUser";
+import { addSeed } from "src/services/seeds";
 import * as Yup from "yup";
 import Input from "./Input";
-import { addSeed } from "src/services/seeds";
-import { useUser } from "src/hooks/useUser";
-import { useAuth } from "src/hooks/useAuth";
+import MetricSelect from "./MetricSelect";
+import PlantGroupSelect from "./PlantGroupSelect";
+import PlantTypeSelect from "./PlantTypeSelect";
 
 const loginSchema = Yup.object().shape({
-	plantGroup: Yup.string().required("Plant group is required"),
-	plantType: Yup.string().required("Plant type is required").nullable(),
-	variety: Yup.string().required("Variety is required").nullable(),
+	plantGroup: Yup.string(),
+	plantType: Yup.string(),
+	variety: Yup.string().max(32, "Variety must not exceed 32 characters").required("Variety is required"),
 	year: Yup.number("Must be a number")
 		.test(
 			"valid-year",
 			"Invalid year",
-			(year) => year > 2000 && year < new Date().getFullYear()
+			(year) => year > 2000 && year < new Date().getFullYear() 
 		)
 		.required("Harvest year is required"),
 	desc: Yup.string(),
+	quantity: Yup.number().required("Quantity is required"),
+	metric: Yup.string("Metric is required"),
 });
 
 export default function NewSeed() {
@@ -30,10 +33,9 @@ export default function NewSeed() {
 
 	const [loading, setLoading] = useState(false);
 	const {
-		values: { plantGroup, plantType, variety, desc, year },
+		values: { plantGroup, plantType, variety, desc, year, quantity, metric },
 		handleSubmit,
 		handleChange,
-		touched,
 		errors,
 		resetForm,
 	} = useFormik({
@@ -43,6 +45,8 @@ export default function NewSeed() {
 			variety: "",
 			year: new Date().getFullYear(),
 			desc: "",
+			quantity: 0,
+			metric: "count"
 		},
 		onSubmit: handleSave,
 		validationSchema: loginSchema,
@@ -51,7 +55,11 @@ export default function NewSeed() {
 	async function handleSave(values) {
 		try {
 			setLoading(true);
-			await addSeed({ id: userID, username }, values);
+			await addSeed({ id: userID, username }, {
+				...values,
+				plantGroup: values.plantGroup || null,
+				plantType: values.plantType || null,
+			});
 			resetForm();
 			setOpen(false);
 		} catch (error) {
@@ -96,7 +104,7 @@ export default function NewSeed() {
 						error={errors.plantType}
 					/>
 					<Input
-						label="Variety"
+						label="Variety/Name *"
 						value={variety}
 						type="text"
 						name="variety"
@@ -105,7 +113,7 @@ export default function NewSeed() {
 						error={errors.variety}
 					/>
 					<Input
-						label="Harvest Year"
+						label="Harvest Year *"
 						value={year}
 						type="text"
 						name="year"
@@ -124,6 +132,7 @@ export default function NewSeed() {
 							onChange={handleChange}
 						/>
 					</div>
+					<MetricSelect metric={metric} handleChange={handleChange} error={errors.metric} />
 					<label className="label">
 						<span className="label-text-alt text-red-600">
 							{errors.desc}
