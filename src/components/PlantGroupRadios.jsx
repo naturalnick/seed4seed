@@ -1,4 +1,3 @@
-import { titleCase } from "src/utils";
 import { plantGroups } from "src/data/plant-groups";
 
 export default function PlantGroupSelect({
@@ -6,16 +5,16 @@ export default function PlantGroupSelect({
 	setPlantGroup,
 	hidden,
 }) {
-	const plantGroupItems = plantGroups.map((p) => (
-		<div key={p.value} className="form-control px-3">
+	const plantGroupItems = plantGroups.map((pg) => (
+		<div key={pg} className="form-control px-3">
 			<label className="label cursor-pointer">
-				<span className="label-text">{titleCase(p.name)}</span>
+				<span className="label-text">{pg}</span>
 				<input
 					type="radio"
 					name="radio-plant-group"
 					className="radio"
-					checked={plantGroup == p.value}
-					onChange={() => setPlantGroup(p.value)}
+					checked={pg == plantGroup}
+					onChange={() => setPlantGroup(pg)}
 				/>
 			</label>
 		</div>

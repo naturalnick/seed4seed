@@ -27,6 +27,7 @@ export default function Profile() {
 			plantGroup={seed.plantGroup}
 			plantType={seed.plantType}
 			variety={seed.variety}
+			year={seed.year}
 			desc={seed.desc}
 			user={seed.user}
 		/>

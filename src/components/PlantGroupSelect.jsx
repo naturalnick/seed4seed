@@ -1,10 +1,9 @@
-import { titleCase } from "src/utils";
 import { plantGroups } from "src/data/plant-groups";
 
 export default function PlantGroupSelect({ plantGroup, handleChange, error }) {
-	const plantGroupItems = plantGroups.map((p) => (
-		<option key={p.value} value={p.value}>
-			{titleCase(p.name)}
+	const plantGroupItems = plantGroups.map((plantGroup) => (
+		<option key={plantGroup} value={plantGroup}>
+			{plantGroup}
 		</option>
 	));
 	return (
