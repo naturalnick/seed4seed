@@ -1,7 +1,5 @@
-import { useState, useEffect, createContext } from "react";
 import PropTypes from "prop-types";
-import { onAuthStateChanged } from "firebase/auth";
-import { fAuth } from "src/firebase";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext({});
 
@@ -10,13 +8,9 @@ export function AuthProvider({ children }) {
 	const [email, setEmail] = useState(undefined);
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(fAuth, async (user) => {
-			setUserID(user?.uid ?? null);
-			setEmail(user?.email ?? null);
-		});
-		return () => {
-			unsubscribe();
-		};
+		// set auth state here from server
+		setUserID("user");
+		setEmail("email");
 	}, []);
 
 	return (

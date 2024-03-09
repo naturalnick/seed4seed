@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useAuth } from "src/hooks/useAuth";
 import { useUser } from "src/hooks/useUser";
-import { addSeed } from "src/services/seeds";
 import * as Yup from "yup";
 import Input from "./Input";
 import MetricSelect from "./MetricSelect";
@@ -13,12 +12,14 @@ import PlantTypeSelect from "./PlantTypeSelect";
 const loginSchema = Yup.object().shape({
 	plantGroup: Yup.string(),
 	plantType: Yup.string(),
-	variety: Yup.string().max(32, "Variety must not exceed 32 characters").required("Variety is required"),
+	variety: Yup.string()
+		.max(32, "Variety must not exceed 32 characters")
+		.required("Variety is required"),
 	year: Yup.number("Must be a number")
 		.test(
 			"valid-year",
 			"Invalid year",
-			(year) => year > 2000 && year < new Date().getFullYear() 
+			(year) => year > 2000 && year < new Date().getFullYear()
 		)
 		.required("Harvest year is required"),
 	desc: Yup.string(),
@@ -33,7 +34,15 @@ export default function NewSeed() {
 
 	const [loading, setLoading] = useState(false);
 	const {
-		values: { plantGroup, plantType, variety, desc, year, quantity, metric },
+		values: {
+			plantGroup,
+			plantType,
+			variety,
+			desc,
+			year,
+			quantity,
+			metric,
+		},
 		handleSubmit,
 		handleChange,
 		errors,
@@ -46,7 +55,7 @@ export default function NewSeed() {
 			year: new Date().getFullYear(),
 			desc: "",
 			quantity: 0,
-			metric: "count"
+			metric: "count",
 		},
 		onSubmit: handleSave,
 		validationSchema: loginSchema,
@@ -55,11 +64,7 @@ export default function NewSeed() {
 	async function handleSave(values) {
 		try {
 			setLoading(true);
-			await addSeed({ id: userID, username }, {
-				...values,
-				plantGroup: values.plantGroup || null,
-				plantType: values.plantType || null,
-			});
+			// addSeed()
 			resetForm();
 			setOpen(false);
 		} catch (error) {
@@ -132,7 +137,11 @@ export default function NewSeed() {
 							onChange={handleChange}
 						/>
 					</div>
-					<MetricSelect metric={metric} handleChange={handleChange} error={errors.metric} />
+					<MetricSelect
+						metric={metric}
+						handleChange={handleChange}
+						error={errors.metric}
+					/>
 					<label className="label">
 						<span className="label-text-alt text-red-600">
 							{errors.desc}
