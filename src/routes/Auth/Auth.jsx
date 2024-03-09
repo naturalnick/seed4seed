@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { createUser, loginUser } from "src/services/auth";
-import { useAuth } from "src/hooks/useAuth";
-import Input from "src/components/Input";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Input from "src/components/Input";
+import { useAuth } from "src/hooks/useAuth";
+import * as Yup from "yup";
 
 const loginSchema = Yup.object().shape({
 	email: Yup.string().email("Invalid email").required("Email is required"),
@@ -53,9 +52,9 @@ export default function Auth() {
 		try {
 			setLoading(true);
 			if (isRegistering) {
-				await createUser(values);
+				//createUser()
 			} else {
-				await loginUser(values.email, values.password);
+				//loginUser()
 			}
 		} catch (error) {
 			console.log(error);
@@ -128,7 +127,9 @@ export default function Auth() {
 							<button
 								type="button"
 								className="underline"
-								onClick={() => setIsRegistering((prev) => !prev)}
+								onClick={() =>
+									setIsRegistering((prev) => !prev)
+								}
 								disabled={loading}
 							>
 								Sign {isRegistering ? "In" : "Up"}

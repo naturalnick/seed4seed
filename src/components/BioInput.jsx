@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { updateUser } from "src/services/users";
 
 export default function BioInput({ userID, bio }) {
 	const [newBio, setNewBio] = useState(bio);
@@ -11,7 +10,7 @@ export default function BioInput({ userID, bio }) {
 
 	async function handleSave() {
 		try {
-			await updateUser(userID, { bio: newBio });
+			//updateUser()
 			setEditing(false);
 		} catch (error) {
 			console.log(error);

@@ -1,7 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
-import { useAuth } from "src/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logoutUser } from "src/services/auth";
+import { useAuth } from "src/hooks/useAuth";
 
 export default function Nav() {
 	const { userID } = useAuth();
@@ -31,19 +30,6 @@ export default function Nav() {
 								</p>
 							</Link>
 						</li>
-						<li>
-							<Link to="/events">
-								<p
-									className={
-										location.pathname === "/events"
-											? "border-b-2 border-black"
-											: ""
-									}
-								>
-									Events
-								</p>
-							</Link>
-						</li>
 					</ul>
 				</div>
 				<div className="navbar-end">
@@ -62,9 +48,6 @@ export default function Nav() {
 								<li className="lg:hidden">
 									<a>Browse</a>
 								</li>
-								<li className="lg:hidden">
-									<a>Events</a>
-								</li>
 								<li>
 									<Link to="/myprofile">My Profile</Link>
 								</li>
@@ -74,11 +57,11 @@ export default function Nav() {
 								<li>
 									<Link to="/messages">Messages</Link>
 								</li>
-								<li>
+								{/* <li>
 									<Link to="/settings">Settings</Link>
-								</li>
+								</li> */}
 								<li>
-									<button type="button" onClick={logoutUser}>
+									<button type="button" onClick={() => {}}>
 										Sign Out
 									</button>
 								</li>
