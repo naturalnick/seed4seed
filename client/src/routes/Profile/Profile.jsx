@@ -45,8 +45,8 @@ export default function Profile() {
 						<FaUserCircle size={50} />
 						<div className="text-sm space-y-1">
 							<p>{location}</p>
-							<p>Member since {formatDateAndTime(dateCreated)}</p>
-							<p>Last Trade {formatDateAndTime(dateCreated)}</p>
+							<p>Member since DATE</p>
+							<p>Last Trade DATE</p>
 						</div>
 						<div className="text-sm mt-3">
 							<p className="font-semibold">Bio</p>
