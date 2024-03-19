@@ -1,9 +1,9 @@
 export const plantGroups = [
-	"Veggies",
+	"Vegetables",
 	"Fruits, Berries & Nuts",
 	"Grains",
-	"Herbs & Spices", 
+	"Herbs & Spices",
 	"Flowers",
-	"Trees",
+	"Trees & Shrubs",
 	"Misc",
 ];
