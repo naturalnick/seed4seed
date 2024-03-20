@@ -46,4 +46,4 @@ This project is licensed under the "All Rights Reserved" license. You are not al
 
 Thank you for checking out our Seed Trading Web Application! If you have any questions or feedback, feel free to reach out to us. Happy trading! 🌱🌿
 
-- Nick Schaefer & Natalie Salazar 
+- Nick Schaefer (Creator) & Natalie Salazar (Co-Developer)
