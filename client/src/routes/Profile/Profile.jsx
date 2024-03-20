@@ -6,7 +6,7 @@ import UserRating from "src/components/UserRating";
 import { useAuth } from "src/hooks/useAuth";
 import { useSeeds } from "src/hooks/useSeeds";
 import { useUser } from "src/hooks/useUser";
-import { formatDateAndTime } from "src/utils";
+// import formatDateAndTime  from "src/utils";
 
 export default function Profile() {
 	const navigate = useNavigate();
